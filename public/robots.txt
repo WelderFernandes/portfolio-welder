@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://welder-portfolio.vercel.app/sitemap.xml
+
