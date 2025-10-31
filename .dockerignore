@@ -1,0 +1,26 @@
+# Dependências locais
+node_modules
+
+# Builds locais do Next
+.next
+out
+
+# VCS
+.git
+.gitignore
+
+# Logs e caches
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+.next/cache
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Env
+.env
+.env.*
