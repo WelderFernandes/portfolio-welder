@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   web:
     build:
@@ -11,15 +9,11 @@ services:
     environment:
       - NODE_ENV=production
       - PORT=3000
-    ports:
-      - "3000:3000"
+    # Não publicar porta no host para evitar conflitos no servidor do Dockploy
+    expose:
+      - "3000"
     command: ["npm", "run", "start"]
-    # Remova o healthcheck se não precisar
-    healthcheck:
-      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
-      interval: 30s
-      timeout: 5s
-      retries: 5
+    restart: unless-stopped
 
     # Se desejar reduzir o tamanho da imagem durante o dev, você pode desabilitar o healthcheck
     # e usar um override para rodar `next dev`.
