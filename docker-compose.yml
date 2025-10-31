@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ghcr.io/${COMPOSE_GITHUB_OWNER:-owner}/${COMPOSE_REPO_NAME:-portfolio-welder}:latest
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    ports:
+      - "3000:3000"
+    command: ["npm", "run", "start"]
+    # Remova o healthcheck se não precisar
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+    # Se desejar reduzir o tamanho da imagem durante o dev, você pode desabilitar o healthcheck
+    # e usar um override para rodar `next dev`.
+
+    # Exemplo de override de desenvolvimento (crie docker-compose.override.yml):
+    # services:
+    #   web:
+    #     command: ["npm", "run", "dev"]
+    #     volumes:
+    #       - ./:/app
+    #       - /app/node_modules
+
+
