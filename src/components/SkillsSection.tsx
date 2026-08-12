@@ -41,13 +41,13 @@ export const SkillsSection: React.FC = () => {
   };
 
   return (
-    <section id="skills" className="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="skills" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-5xl leading-[1.07] font-semibold tracking-tight font-display text-foreground mb-4">
             Habilidades
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-2xl leading-[1.17] text-muted-foreground max-w-3xl mx-auto">
             Tecnologias e ferramentas que domino para criar soluções completas e eficientes
           </p>
         </div>
@@ -55,7 +55,7 @@ export const SkillsSection: React.FC = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {Object.entries(skillCategories).map(([category, title]) => (
             <Card key={category} className="p-6">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-6 text-center">
+              <h3 className="text-2xl leading-[1.17] font-semibold text-foreground mb-6 text-center">
                 {title}
               </h3>
               
@@ -64,7 +64,7 @@ export const SkillsSection: React.FC = () => {
                   .filter(skill => skill.category === category)
                   .map((skill) => (
                     <div key={skill.name} className="flex items-center justify-between">
-                      <span className="text-gray-700 dark:text-gray-300 font-medium">
+                      <span className="text-muted-foreground font-medium">
                         {skill.name}
                       </span>
                       <span className={`px-2 py-1 rounded-full text-xs text-white ${getLevelColor(skill.level)}`}>
@@ -79,7 +79,7 @@ export const SkillsSection: React.FC = () => {
 
         {/* Featured Skills */}
         <div className="mt-16">
-          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center">
+          <h3 className="text-3xl leading-[1.14] font-semibold text-foreground mb-8 text-center">
             Principais Tecnologias
           </h3>
           

@@ -4,13 +4,13 @@ import { experiences } from '@/data/portfolio';
 
 export const ExperienceSection: React.FC = () => {
   return (
-    <section id="experience" className="py-20 bg-gray-50 dark:bg-gray-800">
+    <section id="experience" className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-5xl leading-[1.07] font-semibold tracking-tight font-display text-foreground mb-4">
             Experiência Profissional
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+          <p className="text-2xl leading-[1.17] text-muted-foreground max-w-3xl mx-auto">
             Minha trajetória profissional e as experiências que moldaram minha carreira
           </p>
         </div>
@@ -31,21 +31,21 @@ export const ExperienceSection: React.FC = () => {
                     <Card className="p-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <div>
-                          <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+                          <h3 className="text-2xl leading-[1.17] font-semibold text-foreground">
                             {experience.position}
                           </h3>
-                          <h4 className="text-lg text-blue-600 dark:text-blue-400 font-medium">
+                          <h4 className="text-lg text-foreground font-medium">
                             {experience.company}
                           </h4>
                         </div>
                         <div className="mt-2 md:mt-0">
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-background border border-border text-foreground">
                             {experience.period}
                           </span>
                         </div>
                       </div>
 
-                      <p className="text-gray-700 dark:text-gray-300 mb-4">
+                      <p className="text-muted-foreground mb-4">
                         {experience.description}
                       </p>
 
@@ -54,7 +54,7 @@ export const ExperienceSection: React.FC = () => {
                         {experience.technologies.map((tech) => (
                           <span
                             key={tech}
-                            className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-sm rounded"
+                            className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-muted-foreground text-sm rounded"
                           >
                             {tech}
                           </span>
@@ -70,7 +70,7 @@ export const ExperienceSection: React.FC = () => {
 
         {/* Education Section */}
         <div className="mt-20">
-          <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-8 text-center">
+          <h3 className="text-3xl leading-[1.14] font-semibold text-foreground mb-8 text-center">
             Formação Acadêmica
           </h3>
           
@@ -84,16 +84,16 @@ export const ExperienceSection: React.FC = () => {
                   </svg>
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                  <h4 className="text-lg font-semibold text-foreground">
                     UniSales - Centro Universitário Salesiano
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-muted-foreground">
                     Graduação em Tecnologia da Informação
                   </p>
                 </div>
               </div>
               
-              <p className="text-gray-700 dark:text-gray-300">
+              <p className="text-muted-foreground">
                 Formação sólida em desenvolvimento de software, banco de dados, engenharia de software e gestão de projetos tecnológicos.
               </p>
             </Card>

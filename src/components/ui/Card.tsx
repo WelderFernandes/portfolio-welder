@@ -11,8 +11,8 @@ export const Card: React.FC<CardProps> = ({
   className = '', 
   hover = false 
 }) => {
-  const baseClasses = 'bg-white dark:bg-gray-800 rounded-lg shadow-md border border-gray-200 dark:border-gray-700';
-  const hoverClasses = hover ? 'hover:shadow-lg hover:scale-105 transition-all duration-300' : '';
+  const baseClasses = 'glass-panel rounded-3xl overflow-hidden relative z-10';
+  const hoverClasses = hover ? 'hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-500 ease-out' : '';
   
   return (
     <div className={`${baseClasses} ${hoverClasses} ${className}`}>
