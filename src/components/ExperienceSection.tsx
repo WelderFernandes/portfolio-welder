@@ -21,7 +21,7 @@ export const ExperienceSection: React.FC = () => {
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-blue-600 dark:bg-blue-400"></div>
 
             <div className="space-y-12">
-              {experiences.map((experience, index) => (
+              {experiences.map((experience) => (
                 <div key={experience.id} className="relative flex items-start">
                   {/* Timeline Dot */}
                   <div className="absolute left-6 w-4 h-4 bg-blue-600 dark:bg-blue-400 rounded-full border-4 border-white dark:border-gray-800"></div>
