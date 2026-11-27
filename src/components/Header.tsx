@@ -1,97 +1,177 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { useEffect, useRef, useState } from "react";
+import { personalInfo } from "@/data/portfolio";
+import { ArrowRight, MenuIcon } from "./icons";
 
-export const Header: React.FC = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+const NAV = [
+  { id: "projects", label: "Projetos", num: "02" },
+  { id: "stack", label: "Stack", num: "03" },
+  { id: "about", label: "Sobre", num: "04" },
+  { id: "experience", label: "Experiência", num: "05" },
+];
+const MENU = [...NAV, { id: "contact", label: "Contato", num: "06" }];
 
+export function Header() {
+  const [active, setActive] = useState("");
+  const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const barRef = useRef<HTMLSpanElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+
+  // Barra de progresso + seção ativa
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    let ticking = false;
+    const update = () => {
+      ticking = false;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      if (barRef.current) barRef.current.style.transform = `scaleX(${max > 0 ? scrollY / max : 0})`;
+      const line = innerHeight * 0.35;
+      let current = "";
+      for (const { id } of MENU) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= line) current = id;
+      }
+      setActive(current);
     };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    };
+    update();
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    return () => {
+      removeEventListener("scroll", onScroll);
+      removeEventListener("resize", onScroll);
+    };
   }, []);
 
-  const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'Sobre' },
-    { href: '#skills', label: 'Habilidades' },
-    { href: '#projects', label: 'Projetos' },
-    { href: '#experience', label: 'Experiência' },
-    { href: '#contact', label: 'Contato' }
-  ];
+  const close = () => {
+    if (!open) return;
+    setOpen(false);
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    setClosing(true);
+    setTimeout(() => setClosing(false), 200);
+  };
+
+  // Fecha com Esc ou clique fora
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        close();
+        btnRef.current?.focus();
+      }
+    };
+    const onClick = (e: MouseEvent) => {
+      const t = e.target as Node;
+      if (!menuRef.current?.contains(t) && !btnRef.current?.contains(t)) close();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("click", onClick);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("click", onClick);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open]);
+
+  const visible = open || closing;
 
   return (
-    <header className={cn(
-      "fixed top-4 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl rounded-full z-50 transition-all duration-300",
-      isScrolled 
-        ? "bg-background/95 backdrop-blur-xl border border-border shadow-lg shadow-black/5" 
-        : "glass-panel"
-    )}>
-      <nav className="px-6 py-3">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="text-2xl font-display tracking-tighter font-bold text-foreground hover:opacity-80 transition-opacity">
-            <span className="text-gradient">W</span>F
-          </Link>
-
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-200"
-              >
-                {item.label}
-              </a>
-            ))}
-          </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="md:hidden p-2 rounded-full text-foreground hover:bg-muted/50"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            <svg
-              className="w-5 h-5"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+    <>
+      <header className="site-header">
+        <div className="header-bar">
+          <a href="#topo" className="brand" aria-label={`${personalInfo.firstName} Dev, início`}>
+            <b>{personalInfo.brand}</b> <span>DEV</span>
+          </a>
+          <nav className="main-nav" aria-label="Seções">
+            <ul>
+              {NAV.map((n) => (
+                <li key={n.id}>
+                  <a
+                    href={`#${n.id}`}
+                    className={active === n.id ? "is-active" : undefined}
+                    aria-current={active === n.id ? "location" : undefined}
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <div className="header-actions">
+            <a href="#contact" className="cta-pill">
+              Fale comigo <ArrowRight />
+            </a>
+            <button
+              ref={btnRef}
+              type="button"
+              className="menu-btn"
+              aria-label={open ? "Fechar menu" : "Abrir menu"}
+              aria-expanded={open}
+              aria-controls="menu"
+              onClick={() => (open ? close() : setOpen(true))}
             >
-              {isMenuOpen ? (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
-          </button>
+              <MenuIcon open={open} />
+            </button>
+          </div>
+          <span ref={barRef} className="scroll-progress" aria-hidden="true" />
         </div>
+      </header>
 
-        {/* Mobile Navigation */}
-        <div className={cn(
-          "md:hidden overflow-hidden transition-all duration-300 ease-in-out",
-          isMenuOpen ? "max-h-64 opacity-100 mt-4" : "max-h-0 opacity-0"
-        )}>
-          <div className="flex flex-col space-y-2 pb-2">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="block px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors duration-200"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.label}
+      <div className="menu-layer">
+        <div>
+          <div
+            ref={menuRef}
+            id="menu"
+            className={`menu${visible ? " menu-pop" : ""}`}
+            role="dialog"
+            aria-label="Menu"
+            hidden={!visible}
+            data-closing={closing ? "" : undefined}
+          >
+            <nav aria-label="Menu">
+              <ul>
+                {MENU.map((n, i) => (
+                  <li key={n.id} data-menu-item="" style={{ "--i": i } as React.CSSProperties}>
+                    <a
+                      href={`#${n.id}`}
+                      className={`menu-link${active === n.id ? " is-active" : ""}`}
+                      onClick={close}
+                    >
+                      <span className="num mono">{n.num}</span>
+                      <span className="label">{n.label}</span>
+                      <ArrowRight size={20} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            <div className="menu-foot" data-menu-item="" style={{ "--i": MENU.length } as React.CSSProperties}>
+              <p className="avail mono">
+                <i aria-hidden="true" />
+                Aberto a oportunidades
+              </p>
+              <a href={`mailto:${personalInfo.email}`} className="mail">
+                {personalInfo.email}
               </a>
-            ))}
+              <p className="socials mono">
+                <a href={personalInfo.github} target="_blank" rel="noreferrer">
+                  GitHub
+                </a>
+                <a href={personalInfo.linkedin} target="_blank" rel="noreferrer">
+                  LinkedIn
+                </a>
+              </p>
+            </div>
           </div>
         </div>
-      </nav>
-    </header>
+      </div>
+    </>
   );
-};
+}

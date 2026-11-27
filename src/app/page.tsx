@@ -1,23 +1,30 @@
-import { Header } from '@/components/Header';
-import { HeroSection } from '@/components/HeroSection';
-import { AboutSection } from '@/components/AboutSection';
-import { SkillsSection } from '@/components/SkillsSection';
-import { ProjectsSection } from '@/components/ProjectsSection';
-import { ExperienceSection } from '@/components/ExperienceSection';
-import { ContactSection } from '@/components/ContactSection';
-import { Footer } from '@/components/Footer';
+import { Header } from "@/components/Header";
+import { Hero } from "@/components/Hero";
+import { Numbers } from "@/components/Numbers";
+import { Projects } from "@/components/Projects";
+import { Stack } from "@/components/Stack";
+import { About } from "@/components/About";
+import { Experience } from "@/components/Experience";
+import { Contact } from "@/components/Contact";
+import { Footer } from "@/components/Footer";
+import { Motion } from "@/components/Motion";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <>
+      <div id="topo" className="header-spacer" />
       <Header />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ExperienceSection />
-      <ContactSection />
+      <main>
+        <Hero />
+        <Numbers />
+        <Projects />
+        <Stack />
+        <About />
+        <Experience />
+        <Contact />
+      </main>
       <Footer />
-    </main>
+      <Motion />
+    </>
   );
 }
