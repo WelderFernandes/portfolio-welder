@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <rect width="800" height="500" fill="#dfe3e6"/>
+  <rect x="40" y="36" width="760" height="490" rx="14" fill="#ffffff"/>
+  <text x="70" y="82" font-family="Arial, sans-serif" font-weight="700" font-size="22" fill="#111827">Analytics</text>
+  <g font-family="Arial, sans-serif" font-size="11">
+    <rect x="520" y="62" width="70" height="28" rx="8" fill="#1e3a46"/><text x="538" y="80" fill="#fff">30 dias</text>
+    <rect x="598" y="62" width="70" height="28" rx="8" fill="#f1f3f4"/><text x="614" y="80" fill="#374151">90 dias</text>
+    <rect x="676" y="62" width="70" height="28" rx="8" fill="#f1f3f4"/><text x="696" y="80" fill="#374151">1 ano</text>
+  </g>
+  <g font-family="Arial, sans-serif">
+    <rect x="70" y="110" width="210" height="90" rx="12" fill="#f6f8f8"/>
+    <text x="88" y="138" font-size="11" fill="#6b7280">Usuários ativos</text><text x="88" y="176" font-size="28" font-weight="700" fill="#111827">24,8 mil</text>
+    <rect x="296" y="110" width="210" height="90" rx="12" fill="#f6f8f8"/>
+    <text x="314" y="138" font-size="11" fill="#6b7280">Conversão</text><text x="314" y="176" font-size="28" font-weight="700" fill="#111827">3,9%</text>
+    <rect x="522" y="110" width="224" height="90" rx="12" fill="#f6f8f8"/>
+    <text x="540" y="138" font-size="11" fill="#6b7280">Receita</text><text x="540" y="176" font-size="28" font-weight="700" fill="#111827">R$ 182 mil</text>
+  </g>
+  <rect x="70" y="216" width="436" height="270" rx="12" fill="#f6f8f8"/>
+  <g stroke="#e3e8ea"><path d="M90 420 H490 M90 370 H490 M90 320 H490 M90 270 H490"/></g>
+  <path d="M90 410 L140 390 L190 396 L240 360 L290 368 L340 320 L390 330 L440 286 L490 300 L490 470 L90 470 Z" fill="#9cc3ca" opacity=".45"/>
+  <path d="M90 410 L140 390 L190 396 L240 360 L290 368 L340 320 L390 330 L440 286 L490 300" stroke="#1e3a46" stroke-width="3" fill="none" stroke-linejoin="round"/>
+  <path d="M90 440 L140 432 L190 428 L240 418 L290 420 L340 400 L390 404 L440 384 L490 380" stroke="#3f7f8c" stroke-width="2" fill="none" stroke-dasharray="5 5"/>
+  <rect x="522" y="216" width="224" height="270" rx="12" fill="#f6f8f8"/>
+  <text x="540" y="246" font-family="Arial, sans-serif" font-weight="700" font-size="12" fill="#111827">Origem do tráfego</text>
+  <g transform="translate(634 350)">
+    <circle r="64" fill="none" stroke="#1e3a46" stroke-width="24" stroke-dasharray="160 402"/>
+    <circle r="64" fill="none" stroke="#3f7f8c" stroke-width="24" stroke-dasharray="110 402" stroke-dashoffset="-160"/>
+    <circle r="64" fill="none" stroke="#9cc3ca" stroke-width="24" stroke-dasharray="80 402" stroke-dashoffset="-270"/>
+    <circle r="64" fill="none" stroke="#e3b341" stroke-width="24" stroke-dasharray="52 402" stroke-dashoffset="-350"/>
+  </g>
+</svg>
